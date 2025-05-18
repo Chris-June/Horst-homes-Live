@@ -1,27 +1,27 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Search, Filter, Phone, Star, Calendar, User, Clock, ArrowRight, Share2, Shield } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
-import { DeleteButton } from '@/components/admin/DeleteButton';
-import { BlogUploadModal } from '@/components/admin/blog-upload-modal';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { supabase } from '../lib/supabase';
+import { DeleteButton } from '../components/admin/DeleteButton';
+import { BlogUploadModal } from '../components/admin/blog-upload-modal';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '../components/ui/select';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '@/components/ui/dialog';
-import { Badge } from '@/components/ui/badge';
+} from '../components/ui/dialog';
+import { Badge } from '../components/ui/badge';
 import {
   Card,
   CardContent,
@@ -29,14 +29,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { PageWrapper } from '@/components/PageWrapper';
-import { AnimatedSection } from '@/components/AnimatedSection';
-import { AnimatedCard } from '@/components/AnimatedCard';
-import { LoadingSpinner } from '@/components/ui/loading-spinner';
-import { ErrorMessage } from '@/components/ui/error-message';
-import { EmptyState } from '@/components/ui/empty-state';
-import type { BlogPost } from '@/lib/types';
+} from '../components/ui/card';
+import { PageWrapper } from '../components/PageWrapper';
+import { AnimatedSection } from '../components/AnimatedSection';
+import { AnimatedCard } from '../components/AnimatedCard';
+import { LoadingSpinner } from '../components/ui/loading-spinner';
+import { ErrorMessage } from '../components/ui/error-message';
+import { EmptyState } from '../components/ui/empty-state';
+import type { BlogPost } from '../lib/types';
 
 const categories = [
   { value: 'all', label: 'All Posts' },

@@ -9,6 +9,7 @@ export interface BlogPost {
   read_time: string;
   image_url: string;
   tags?: string[];
+  published_at: Date;
   created_at: string;
   updated_at: string;
 }

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../components/ui/button';
 import {
   Form,
   FormControl,
@@ -12,12 +12,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
-import { PageWrapper } from '@/components/PageWrapper';
-import { AnimatedSection } from '@/components/AnimatedSection';
+} from '../components/ui/form';
+import { Input } from '../components/ui/input';
+import { Textarea } from '../components/ui/textarea';
+import { useToast } from '../hooks/use-toast';
+import { PageWrapper } from '../components/PageWrapper';
+import { AnimatedSection } from '../components/AnimatedSection';
 
 // Form validation schema
 const formSchema = z.object({

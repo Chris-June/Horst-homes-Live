@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 interface PageWrapperProps {
   children: React.ReactNode;
   className?: string;
-  variant?: 'default' | 'alt' | 'radial' | 'mesh';
+  variant?: 'default' | 'alt' | 'radial' | 'mesh' | 'premium';
 }
 
 export function PageWrapper({ 
@@ -25,6 +25,7 @@ export function PageWrapper({
         variant === 'alt' && 'bg-gradient-pattern-alt',
         variant === 'radial' && 'bg-gradient-radial',
         variant === 'mesh' && 'bg-gradient-mesh',
+        variant === 'premium' && 'bg-gradient-premium',
         className
       )}
     >

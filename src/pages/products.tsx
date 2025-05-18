@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Search, Filter, Phone, Star, Shield, Zap, Ruler, Palette, CheckCircle, ArrowRight } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
-import { DeleteButton } from '@/components/admin/DeleteButton';
-import { AdminButton } from '@/components/admin/AdminButton';
-import { ProductsUploadModal } from '@/components/admin/products-upload-modal';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { supabase } from '../lib/supabase';
+import { DeleteButton } from '../components/admin/DeleteButton';
+import { AdminButton } from '../components/admin/AdminButton';
+import { ProductsUploadModal } from '../components/admin/products-upload-modal';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '../components/ui/select';
 import {
   Dialog,
   DialogContent,
@@ -22,8 +22,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Badge } from '@/components/ui/badge';
+} from '../components/ui/dialog';
+import { Badge } from '../components/ui/badge';
 import {
   Card,
   CardContent,
@@ -31,14 +31,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { PageWrapper } from '@/components/PageWrapper';
-import { AnimatedSection } from '@/components/AnimatedSection';
-import { AnimatedCard } from '@/components/AnimatedCard';
-import { LoadingSpinner } from '@/components/ui/loading-spinner';
-import { ErrorMessage } from '@/components/ui/error-message';
-import { EmptyState } from '@/components/ui/empty-state';
-import type { Product } from '@/lib/types';
+} from '../components/ui/card';
+import { PageWrapper } from '../components/PageWrapper';
+import { AnimatedSection } from '../components/AnimatedSection';
+import { AnimatedCard } from '../components/AnimatedCard';
+import { LoadingSpinner } from '../components/ui/loading-spinner';
+import { ErrorMessage } from '../components/ui/error-message';
+import { EmptyState } from '../components/ui/empty-state';
+import type { Product } from '../lib/types';
 
 const features = [
   {
@@ -384,6 +384,9 @@ const testimonials = [
               />
             </div>
             <div className="flex items-center gap-2">
+              <AdminButton>
+                <ProductsUploadModal />
+              </AdminButton>
               <Filter className="h-4 w-4 text-gray-400" />
               <Select
                 value={selectedCategory}
