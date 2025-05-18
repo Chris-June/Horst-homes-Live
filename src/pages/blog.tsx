@@ -316,7 +316,7 @@ export function Blog() {
       {/* CTA Section */}
       <div className="relative py-24 sm:py-32 overflow-hidden isolate">
         <div className="absolute inset-0 bg-gradient-pattern opacity-5" />
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
+        <div className="noise" />
         <div className="absolute inset-y-0 right-0 -z-10 w-1/2 bg-gradient-to-l from-blue-600/10 via-blue-400/5 to-transparent" />
         <div className="absolute inset-y-0 left-0 -z-10 w-1/2 bg-gradient-to-r from-red-600/10 via-red-400/5 to-transparent" />
 

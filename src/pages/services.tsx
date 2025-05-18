@@ -1,27 +1,68 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { AppWindow as Window, DoorOpen, Home, PaintBucket, Hammer, Wrench, ChevronDown, ChevronUp, MapPin, Phone, Star, Info, Shield } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { PageWrapper } from '@/components/PageWrapper';
-import { AnimatedSection } from '@/components/AnimatedSection';
-import { AnimatedCard } from '@/components/AnimatedCard';
-import { ServiceDetailsModal } from '@/components/services/ServiceDetailsModal';
+// Import UI components
+import { Button as BaseButton } from '../components/ui/button';
+import { PageWrapper } from '../components/PageWrapper';
+import { AnimatedSection } from '../components/AnimatedSection';
+import { AnimatedCard } from '../components/AnimatedCard';
+import { ServiceDetailsModal } from '../components/services/ServiceDetailsModal';
+import { cn } from '../lib/utils';
 
-const services = [
+// Create a typed Button component with variant support
+type ButtonVariant = 'default' | 'outline' | 'secondary' | 'ghost' | 'link' | 'destructive';
+
+interface ButtonProps extends React.ComponentProps<typeof BaseButton> {
+  variant?: ButtonVariant;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, variant = 'default', ...props }, ref) => {
+  const variantClasses = {
+    default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+    outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+    secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+    ghost: 'hover:bg-accent hover:text-accent-foreground',
+    link: 'text-primary underline-offset-4 hover:underline',
+    destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+  };
+
+  return (
+    <BaseButton
+      ref={ref}
+      className={cn(
+        variantClasses[variant] || variantClasses.default,
+        className
+      )}
+      {...props}
+    />
+  );
+});
+
+Button.displayName = 'Button';
+import { Laptop, DoorOpen, Home, PaintBucket, Hammer, Wrench, ChevronDown, ChevronUp, MapPin, Phone, Star, Info, Shield } from 'lucide-react';
+
+interface Service {
+  icon: React.ComponentType<{ className?: string }>;
+  name: string;
+  description: string;
+  details: string[];
+  image: string;
+  date: string;
+}
+
+const services: Service[] = [
   {
-    icon: Window,
+    icon: Laptop,
     name: 'Window Installation & Replacement',
-    description:
-      "Expert installation of energy-efficient windows to enhance your home's comfort and curb appeal.",
+    description: "Expert installation of energy-efficient windows to enhance your home's comfort and curb appeal.",
     details: [
       'Energy-efficient window options',
-      'Professional installation by experienced craftsmen',
-      'Custom sizing and styles available',
-      'Warranty-backed installations',
+      'Professional measurement and installation',
+      'Custom window solutions',
+      'Warranty on all installations',
     ],
-    image:
-      'https://images.unsplash.com/photo-1503708928676-1cb796a0891e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2074&q=80',
+    image: '/images/services/window-installation.jpg',
+    date: '2023-01-15',
   },
   {
     icon: DoorOpen,
@@ -36,6 +77,7 @@ const services = [
     ],
     image:
       'https://images.unsplash.com/photo-1489171078254-c3365d6e359f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80',
+    date: '2023-02-20',
   },
   {
     icon: Home,
@@ -50,6 +92,7 @@ const services = [
     ],
     image:
       'https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80',
+    date: '2023-03-10',
   },
   {
     icon: PaintBucket,
@@ -64,6 +107,7 @@ const services = [
     ],
     image:
       'https://images.unsplash.com/photo-1604079628040-94301bb21b91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80',
+    date: '2023-03-15',
   },
  
   {
@@ -79,6 +123,7 @@ const services = [
     ],
     image:
       'https://images.unsplash.com/photo-1581141849291-1125c7b692b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
+    date: '2023-04-01',
   },
 ];
 
@@ -117,7 +162,7 @@ export function Services() {
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
 
   return (
-    <PageWrapper variant="premium">
+    <PageWrapper variant="default">
       {/* Hero Section */}
       <div className="relative min-h-[80vh] w-full overflow-hidden">
         <div className="absolute inset-0 overflow-hidden bg-gray-900">
@@ -145,7 +190,7 @@ export function Services() {
             with quality and care in Chatham-Kent.
           </p>
           <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button asChild size="lg" className="text-lg px-8 py-6 hover-lift">
+            <Button asChild className="text-lg px-8 py-6">
               <Link to="/quote">Request a Free Quote</Link>
             </Button>
           </div>
@@ -190,8 +235,7 @@ export function Services() {
               </div>
               <Button
                 variant="ghost"
-                size="icon"
-                className="rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/20 flex-shrink-0 ml-4"
+                className="rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/20 flex-shrink-0 ml-4 p-2"
                 onClick={() => setSelectedService(service)}
               >
                 <Info className="h-5 w-5 text-blue-600" />
@@ -294,7 +338,7 @@ export function Services() {
       {/* CTA Section */}
       <div className="relative py-24 sm:py-32 overflow-hidden isolate">
         <div className="absolute inset-0 bg-gradient-pattern opacity-5" />
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
+        <div className="noise" />
         <div className="absolute inset-y-0 right-0 -z-10 w-1/2 bg-gradient-to-l from-blue-600/10 via-blue-400/5 to-transparent" />
         <div className="absolute inset-y-0 left-0 -z-10 w-1/2 bg-gradient-to-r from-red-600/10 via-red-400/5 to-transparent" />
 
@@ -357,14 +401,13 @@ export function Services() {
                       </p>
                     </div>
                     <div className="space-y-4">
-                      <Button asChild size="lg" className="w-full text-lg py-6 hover-lift">
+                      <Button asChild className="w-full text-lg py-6">
                         <Link to="/quote">Get Your Free Quote</Link>
                       </Button>
-                      <Button 
-                        asChild 
-                        variant="outline" 
-                        size="lg" 
-                        className="w-full text-lg py-6 hover-lift"
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="w-full text-lg py-6"
                       >
                         <a href="tel:+15555555555" className="flex items-center justify-center gap-2">
                           <Phone className="h-5 w-5" />
