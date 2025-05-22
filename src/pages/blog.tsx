@@ -16,6 +16,7 @@ import {
 } from '../components/ui/select';
 import {
   Dialog,
+  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -175,63 +176,67 @@ export function Blog() {
           <AnimatedSection className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             {filteredPosts.map((post, index) => (
               <Dialog key={post.id}>
-                <AnimatedCard 
-                  delay={index * 0.1} 
-                  className="cursor-pointer overflow-hidden bg-gradient-card hover-lift"
-                >
-                  <CardHeader className="p-0">
-                    <div className="relative">
-                      <DeleteButton
-                        id={post.id}
-                        table="blog_posts"
-                        title={post.title}
-                        onDelete={() => {
-                          setPosts(posts.filter(p => p.id !== post.id));
-                        }}
-                      />
-                      <img
-                        src={post.image_url}
-                        alt={post.title}
-                        className="aspect-[16/9] w-full object-cover"
-                      />
-                      {post.tags && post.tags.length > 0 && (
-                        <div className="absolute top-4 left-4 flex gap-2">
-                          {post.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary">
-                            {tag}
-                          </Badge>
-                          ))}
+                <DialogTrigger asChild>
+                  <button className="text-left w-full">
+                    <AnimatedCard 
+                      delay={index * 0.1} 
+                      className="overflow-hidden bg-gradient-card hover-lift h-full flex flex-col"
+                    >
+                      <CardHeader className="p-0">
+                        <div className="relative">
+                          <DeleteButton
+                            id={post.id}
+                            table="blog_posts"
+                            title={post.title}
+                            onDelete={() => setPosts(posts.filter(p => p.id !== post.id))}
+                          />
+                          <img
+                            src={post.image_url}
+                            alt={post.title}
+                            className="aspect-[16/9] w-full object-cover"
+                          />
+                          {post.tags && post.tags.length > 0 && (
+                            <div className="absolute top-4 left-4 flex gap-2">
+                              {post.tags.map((tag) => (
+                              <Badge key={tag} variant="secondary">
+                                {tag}
+                              </Badge>
+                              ))}
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4 text-sm text-gray-500">
-                      <div className="flex items-center gap-1">
-                        <User className="h-4 w-4" />
-                        {post.author}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
-                        {new Date(post.published_at).toLocaleDateString()}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Clock className="h-4 w-4" />
-                        {post.read_time}
-                      </div>
-                    </div>
-                    <CardTitle className="mt-4">{post.title}</CardTitle>
-                    <CardDescription className="mt-2">
-                      {post.content.slice(0, 150)}...
-                    </CardDescription>
-                  </CardContent>
-                  <CardFooter className="p-6 pt-0">
-                    <Button variant="ghost" className="ml-auto">
-                      Read More
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </CardFooter>
-                </AnimatedCard>
+                      </CardHeader>
+                      <CardContent className="p-6 flex-1">
+                        <div className="flex items-center gap-4 text-sm text-gray-500">
+                          <div className="flex items-center gap-1">
+                            <User className="h-4 w-4" />
+                            {post.author}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Calendar className="h-4 w-4" />
+                            {new Date(post.published_at).toLocaleDateString()}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Clock className="h-4 w-4" />
+                            {post.read_time}
+                          </div>
+                        </div>
+                        <CardTitle className="mt-4">{post.title}</CardTitle>
+                        <CardDescription className="mt-2">
+                          {post.content.slice(0, 150)}...
+                        </CardDescription>
+                      </CardContent>
+                      <CardFooter className="p-6 pt-0 mt-auto">
+                        <div className="ml-auto">
+                          <Button variant="ghost" type="button">
+                            Read More
+                            <ArrowRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        </div>
+                      </CardFooter>
+                    </AnimatedCard>
+                  </button>
+                </DialogTrigger>
 
                 <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
                   <DialogHeader>
@@ -275,7 +280,15 @@ export function Blog() {
                         ))
                       )}
                     </div>
-                    <Button variant="outline" size="sm">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigator.clipboard.writeText(window.location.href);
+                        // You might want to add a toast notification here
+                      }}
+                    >
                       <Share2 className="h-4 w-4 mr-2" />
                       Share
                     </Button>

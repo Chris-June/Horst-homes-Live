@@ -1,7 +1,8 @@
+import React from 'react';
 import { useState } from 'react';
 import { Trash2 } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/lib/supabase';
+import { useAuth } from '../../contexts/AuthContext';
+import { supabase } from '../../lib/supabase';
 import { toast } from 'sonner';
 import {
   AlertDialog,
@@ -13,14 +14,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
-import { Button } from '@/components/ui/button';
+} from '../../components/ui/alert-dialog';
+import { Button } from '../../components/ui/button';
 
 interface DeleteButtonProps {
   id: string;
   table: 'blog_posts' | 'products' | 'portfolio_projects';
   title: string;
-  onDelete?: () => void;
+  onDelete?: (e?: React.MouseEvent) => void;
 }
 
 export function DeleteButton({ id, table, title, onDelete }: DeleteButtonProps) {
@@ -29,8 +30,9 @@ export function DeleteButton({ id, table, title, onDelete }: DeleteButtonProps) 
 
   if (!user?.isAdmin) return null;
 
-  const handleDelete = async () => {
+  const handleDelete = async (e?: React.MouseEvent) => {
     try {
+      e?.stopPropagation?.();
       setIsDeleting(true);
       const { error } = await supabase
         .from(table)
@@ -43,7 +45,7 @@ export function DeleteButton({ id, table, title, onDelete }: DeleteButtonProps) 
         description: `${title} has been deleted.`
       });
 
-      if (onDelete) onDelete();
+      if (onDelete) onDelete(e);
     } catch (error) {
       toast.error('Delete Failed', {
         description: error instanceof Error ? error.message : 'Failed to delete item'
