@@ -9,7 +9,23 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd(), '');
     return {
         base: '/',
-        plugins: [react()],
+        plugins: [
+            react({
+                jsxRuntime: 'automatic',
+                jsxImportSource: '@emotion/react',
+                babel: {
+                    plugins: [
+                        ['@emotion/babel-plugin', {
+                                sourceMap: process.env.NODE_ENV !== 'production',
+                                autoLabel: 'dev-only',
+                                labelFormat: '[local]',
+                                cssPropOptimization: true,
+                                useBuiltIns: false,
+                            }],
+                    ],
+                },
+            })
+        ],
         resolve: {
             alias: [
                 { find: '@', replacement: path.resolve(__dirname, 'src') },
@@ -19,6 +35,16 @@ export default defineConfig(({ mode }) => {
                 { find: '@assets', replacement: path.resolve(__dirname, 'src/assets') },
                 { find: '@contexts', replacement: path.resolve(__dirname, 'src/contexts') },
             ],
+            dedupe: ['react', 'react-dom'],
+        },
+        optimizeDeps: {
+            include: [
+                'react',
+                'react-dom',
+                '@emotion/react',
+                '@emotion/styled',
+            ],
+            exclude: ['lucide-react'],
         },
         server: {
             port: 3001,
@@ -37,8 +63,15 @@ export default defineConfig(({ mode }) => {
             assetsDir: 'assets',
             emptyOutDir: true,
             target: 'esnext',
-            minify: 'esbuild',
-            sourcemap: false,
+            minify: 'terser',
+            terserOptions: {
+                compress: {
+                    hoist_vars: false,
+                    hoist_funs: false,
+                    toplevel: false
+                }
+            },
+            sourcemap: true,
             chunkSizeWarningLimit: 1000,
             reportCompressedSize: false,
             rollupOptions: {
@@ -48,12 +81,11 @@ export default defineConfig(({ mode }) => {
                 output: {
                     manualChunks: (id) => {
                         if (id.includes('node_modules')) {
-                            if (id.includes('react-dom') || id.includes('scheduler')) {
+                            if (id.includes('react') || id.includes('react-dom')) {
                                 return 'vendor-react';
                             }
-                            if (id.includes('@radix-ui') || id.includes('class-variance-authority') ||
-                                id.includes('clsx') || id.includes('tailwind-merge')) {
-                                return 'vendor-ui';
+                            if (id.includes('@radix-ui')) {
+                                return 'vendor-radix';
                             }
                             if (id.includes('framer-motion') || id.includes('popmotion')) {
                                 return 'vendor-animations';
@@ -72,15 +104,14 @@ export default defineConfig(({ mode }) => {
                                 return `chunk-${match[1].toLowerCase()}`;
                             }
                         }
+                        // Default chunk for all other modules
+                        return 'common';
                     },
                     chunkFileNames: 'assets/[name]-[hash].js',
                     entryFileNames: 'assets/[name]-[hash].js',
                     assetFileNames: 'assets/[name]-[hash][extname]',
                 },
             },
-        },
-        optimizeDeps: {
-            exclude: ['lucide-react'],
         },
     };
 });
