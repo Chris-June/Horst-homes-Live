@@ -173,7 +173,7 @@ export function Blog() {
           
           {/* Blog Grid */}
           {!isLoading && !error && filteredPosts.length > 0 && (
-          <AnimatedSection className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             {filteredPosts.map((post, index) => (
               <Dialog key={post.id}>
                 <DialogTrigger asChild>
@@ -296,7 +296,7 @@ export function Blog() {
                 </DialogContent>
               </Dialog>
             ))}
-          </AnimatedSection>
+          </div>
           )}
         </div>
       </div>
