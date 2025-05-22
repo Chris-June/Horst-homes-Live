@@ -1,12 +1,13 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { DivideIcon as LucideIcon } from 'lucide-react';
 
 interface FeatureDetailsModalProps {
   isOpen: boolean;
   onClose: () => void;
   feature: {
-    icon: LucideIcon;
+    icon: typeof LucideIcon;
     name: string;
     description: string;
     color: string;
@@ -43,21 +44,21 @@ const modalVariants = {
   }
 };
 
-const iconVariants = {
+const iconVariants: Variants = {
   hover: {
     scale: 1.1,
     rotate: [0, -10, 10, -10, 10, 0],
     transition: {
       duration: 2,
       repeat: Infinity,
-      repeatType: "reverse"
+      repeatType: "reverse" as const
     }
   }
 };
 
 const featureDetails = {
   '30+ Years Experience': {
-    personalMessage: "Every project I take on carries the weight of three decades of learning, growth, and dedication. This isn't just about installing windows or renovating homes – it's about the countless families I've had the privilege to help, and the trust that's been placed in my hands year after year.",
+    personalMessage: "Every project we take on carries the weight of three decades of learning, growth, and dedication. This isn't just about installing windows or renovating homes – it's about the countless families I've had the privilege to help, and the trust that's been placed in my hands year after year.",
     clientBenefit: "When you choose someone with decades of experience, you're getting peace of mind. Every challenge has been seen before, every problem has a tried-and-true solution, and every project benefits from years of refined craftsmanship."
   },
   'Quality Craftsmanship': {
@@ -78,7 +79,8 @@ const featureDetails = {
   }
 };
 
-export function FeatureDetailsModal({ isOpen, onClose, feature }: FeatureDetailsModalProps) {
+// Export as default for dynamic import
+function FeatureDetailsModal({ isOpen, onClose, feature }: FeatureDetailsModalProps) {
   const details = featureDetails[feature.name as keyof typeof featureDetails];
   const Icon = feature.icon;
 
@@ -113,26 +115,19 @@ export function FeatureDetailsModal({ isOpen, onClose, feature }: FeatureDetails
                 </div>
               </DialogHeader>
 
-              <div className="mt-6 space-y-8">
-                {/* Placeholder for headshot image */}
-                <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-400">Photo</span>
+              <div className="mt-6 space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold text-blue-600 mb-2">Why This Matters to Me</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {details.personalMessage}
+                  </p>
                 </div>
 
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-lg font-semibold text-blue-600 mb-2">Why This Matters to Me</h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      {details.personalMessage}
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-semibold text-blue-600 mb-2">Why This Matters to You</h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      {details.clientBenefit}
-                    </p>
-                  </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-blue-600 mb-2">Why This Matters to You</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {details.clientBenefit}
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -142,3 +137,5 @@ export function FeatureDetailsModal({ isOpen, onClose, feature }: FeatureDetails
     </Dialog>
   );
 }
+
+export default FeatureDetailsModal;

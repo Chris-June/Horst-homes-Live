@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -6,9 +6,9 @@ import {
   Home, Info, Briefcase, Package, 
   FolderKanban, FileText, MessageCircle 
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { useTheme } from '@/contexts/ThemeContext';
+import { Button } from '../components/ui/button';
+import { cn } from '../lib/utils';
+import { useTheme } from '../contexts/ThemeContext';
 
 const navigation = [
   { name: 'Home', href: '/', icon: Home },
@@ -111,17 +111,6 @@ export function Header() {
             )}
             <span className="sr-only">Toggle Theme</span>
           </Button>
-          <div className="flex justify-end">
-            <Button asChild size="lg" className="hover-lift">
-              <Link 
-                to="/quote" 
-                className="flex items-center gap-2"
-              >
-                <Phone className="h-4 w-4" />
-                Get a Quote
-              </Link>
-            </Button>
-          </div>
         </div>
         <div className="flex lg:hidden">
           <Button

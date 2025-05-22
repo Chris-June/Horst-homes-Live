@@ -63,6 +63,23 @@ const buttonVariants = cva(
             'after:border after:border-blue-200/20 after:opacity-0',
             'hover:after:opacity-100 after:transition-opacity'
           ].join(' '),
+        transparent:
+          [
+            'bg-transparent text-white border border-white/30',
+            'hover:bg-white/10 hover:border-white/50',
+            'after:absolute after:inset-0 after:rounded-lg',
+            'after:border after:border-white/20 after:opacity-0',
+            'hover:after:opacity-100 after:transition-opacity'
+          ].join(' '),
+        lightBlue:
+          [
+            'bg-blue-100/90 text-blue-800 border border-blue-200/80',
+            'hover:bg-blue-200/90 hover:border-blue-300',
+            'after:absolute after:inset-0 after:rounded-lg',
+            'after:border after:border-blue-300/50 after:opacity-0',
+            'hover:after:opacity-100 after:transition-opacity',
+            'shadow-sm hover:shadow-md transition-all'
+          ].join(' '),
         link:
           'text-primary underline-offset-4 hover:underline hover:text-blue-700'
       },
@@ -80,7 +97,7 @@ const buttonVariants = cva(
   }
 );
 
-export type ButtonVariant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
+export type ButtonVariant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'transparent' | 'lightBlue' | 'link';
 export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon';
 
 export interface ButtonProps
@@ -93,10 +110,13 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'default', size = 'default', asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
+    const variantClass = buttonVariants({ variant, size });
+  
     return (
       <Comp
         className={cn(
-          buttonVariants(),
+          variantClass,
+          className,
           {
             'h-11 px-6 py-2': size === 'default',
             'h-9 rounded-md px-4 py-2 text-xs': size === 'sm',

@@ -1,5 +1,6 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { IconType } from 'react-icons';
 
 interface TimelineDetailsModalProps {
@@ -44,14 +45,14 @@ const modalVariants = {
   }
 };
 
-const iconVariants = {
+const iconVariants: Variants = {
   hover: {
     scale: 1.1,
     rotate: [0, -10, 10, -10, 10, 0],
     transition: {
       duration: 2,
       repeat: Infinity,
-      repeatType: "reverse"
+      repeatType: "reverse" as const
     }
   }
 };
@@ -134,38 +135,31 @@ export function TimelineDetailsModal({ isOpen, onClose, milestone }: TimelineDet
                 </div>
               </DialogHeader>
 
-              <div className="mt-6 space-y-8">
-                {/* Placeholder for historical photo */}
-                <div className="relative w-full h-48 mx-auto rounded-lg overflow-hidden bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-400">Historical Photo</span>
+              <div className="mt-6 space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold text-blue-600 mb-2">A Personal Reflection</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {details.personalMessage}
+                  </p>
                 </div>
 
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-lg font-semibold text-blue-600 mb-2">A Personal Reflection</h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      {details.personalMessage}
-                    </p>
-                  </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-blue-600 mb-2">Community Impact</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    {details.impact}
+                  </p>
+                </div>
 
-                  <div>
-                    <h3 className="text-lg font-semibold text-blue-600 mb-2">Community Impact</h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      {details.impact}
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-semibold text-blue-600 mb-2">Key Achievements</h3>
-                    <ul className="space-y-2">
-                      {details.achievements.map((achievement, index) => (
-                        <li key={index} className="flex items-start gap-2 text-gray-700">
-                          <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-600 flex-shrink-0" />
-                          {achievement}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-blue-600 mb-2">Key Achievements</h3>
+                  <ul className="space-y-2">
+                    {details.achievements.map((achievement, index) => (
+                      <li key={index} className="flex items-start gap-2 text-gray-700">
+                        <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-600 flex-shrink-0" />
+                        {achievement}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </motion.div>

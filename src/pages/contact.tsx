@@ -232,7 +232,7 @@ export function Contact() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Full Name</FormLabel>
+                        <FormLabel className="text-gradient-animated">Full Name</FormLabel>
                         <FormControl>
                           <Input placeholder="Your Name" {...field} />
                         </FormControl>
@@ -246,7 +246,7 @@ export function Contact() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email Address</FormLabel>
+                          <FormLabel className="text-gradient-animated">Email Address</FormLabel>
                           <FormControl>
                             <Input placeholder="you@example.com" {...field} />
                           </FormControl>
@@ -259,7 +259,7 @@ export function Contact() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Phone Number (Optional)</FormLabel>
+                          <FormLabel className="text-gradient-animated">Phone Number (Optional)</FormLabel>
                           <FormControl>
                             <Input placeholder="(555) 555-5555" {...field} />
                           </FormControl>
@@ -273,7 +273,7 @@ export function Contact() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Your Message</FormLabel>
+                        <FormLabel className="text-gradient-animated">Your Message</FormLabel>
                         <FormControl>
                           <Textarea
                             placeholder="Tell us about your project..."

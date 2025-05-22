@@ -1,19 +1,20 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Search, Filter, Phone, Star, Info, Shield } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
-import { DeleteButton } from '@/components/admin/DeleteButton';
-import { PortfolioUploadModal } from '@/components/admin/portfolio-upload-modal';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { supabase } from '../lib/supabase';
+import { DeleteButton } from '../components/admin/DeleteButton';
+import { PortfolioUploadModal } from '../components/admin/portfolio-upload-modal';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from '../components/ui/select';
 import {
   Dialog,
   DialogContent,
@@ -21,8 +22,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Badge } from '@/components/ui/badge';
+} from '../components/ui/dialog';
+import { Badge } from '../components/ui/badge';
 import {
   Card,
   CardContent,
@@ -30,14 +31,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { PageWrapper } from '@/components/PageWrapper';
-import { AnimatedSection } from '@/components/AnimatedSection';
-import { AnimatedCard } from '@/components/AnimatedCard';
-import { LoadingSpinner } from '@/components/ui/loading-spinner';
-import { ErrorMessage } from '@/components/ui/error-message';
-import { EmptyState } from '@/components/ui/empty-state';
-import type { PortfolioProject } from '@/lib/types';
+} from '../components/ui/card';
+import { PageWrapper } from '../components/PageWrapper';
+import { AnimatedSection } from '../components/AnimatedSection';
+import { AnimatedCard } from '../components/AnimatedCard';
+import { LoadingSpinner } from '../components/ui/loading-spinner';
+import { ErrorMessage } from '../components/ui/error-message';
+import { EmptyState } from '../components/ui/empty-state';
+import type { PortfolioProject } from '../lib/types';
 
 const categories = [
   { value: 'all', label: 'All Projects' },
@@ -130,7 +131,12 @@ export function Portfolio() {
               Explore our completed projects and see the quality of our work firsthand. From window installations to complete home renovations, we take pride in every project.
             </p>
             <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Button asChild size="lg" className="text-lg px-8 py-6 hover-lift">
+              <Button 
+                asChild 
+                variant="outline"
+                size="lg" 
+                className="inline-flex items-center justify-center rounded-lg px-8 py-6 text-lg font-medium transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 bg-transparent text-white border-2 border-white/80 hover:bg-white/10 hover:border-white shadow-sm hover:shadow-lg hover:bg-transparent hover:bg-none"
+              >
                 <Link to="/quote">Start Your Project</Link>
               </Button>
             </div>

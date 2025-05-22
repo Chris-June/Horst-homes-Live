@@ -1,13 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
   <head>
+    <!-- Primary Meta Tags -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tim Horst</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="theme-color" content="#1e40af" />
+    <meta name="msapplication-TileColor" content="#1e40af" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://horsthomes.ca" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1e40af" />
+    
+    <!-- Page Title -->
+    <title>Tim Horst | Professional Home Renovations & Construction Services</title>
+    <meta name="title" content="Tim Horst | Professional Home Renovations & Construction Services" />
+    <meta name="description" content="30+ years of experience in home renovations, construction, and remodeling. Quality craftsmanship, fully insured, and WSIB certified. Serving Chatham-Kent and surrounding areas." />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://horsthomes.ca/" />
+    <meta property="og:title" content="Tim Horst | Professional Home Renovations & Construction Services" />
+    <meta property="og:description" content="30+ years of experience in home renovations, construction, and remodeling. Quality craftsmanship, fully insured, and WSIB certified." />
+    <meta property="og:image" content="https://horsthomes.ca/social-preview.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tim Horst - Professional Home Renovations" />
+    <meta property="og:site_name" content="Tim Horst" />
+    <meta property="og:locale" content="en_CA" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://horsthomes.ca/" />
+    <meta property="twitter:title" content="Tim Horst | Professional Home Renovations & Construction Services" />
+    <meta property="twitter:description" content="30+ years of experience in home renovations, construction, and remodeling. Quality craftsmanship, fully insured, and WSIB certified." />
+    <meta property="twitter:image" content="https://horsthomes.ca/social-preview.jpg" />
+    <meta property="twitter:image:alt" content="Tim Horst - Professional Home Renovations" />
+    
+    <!-- Additional SEO Tags -->
+    <meta name="keywords" content="home renovations, construction, remodeling, home improvement, contractor, Chatham-Kent, home remodeling, house renovation, renovation contractor, home addition, kitchen renovation, bathroom renovation, basement finishing" />
+    <meta name="author" content="Tim Horst" />
+    <meta name="publisher" content="Tim Horst" />
+    <meta name="copyright" content="© 2025 Tim Horst. All rights reserved." />
+    
+    <!-- Geo and Business Information -->
+    <meta name="geo.region" content="CA-ON" />
+    <meta name="geo.placename" content="Chatham-Kent" />
+    <meta name="geo.position" content="42.405556;-82.190833" />
+    <meta name="ICBM" content="42.405556, -82.190833" />
+    
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HomeAndConstructionBusiness",
+      "name": "Tim Horst",
+      "image": "https://horsthomes.ca/logo.jpg",
+      "@id": "https://horsthomes.ca",
+      "url": "https://horsthomes.ca",
+      "telephone": "+1-519-555-1234",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Main St",
+        "addressLocality": "Chatham-Kent",
+        "addressRegion": "ON",
+        "postalCode": "N7M 5J3",
+        "addressCountry": "CA"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 42.405556,
+        "longitude": -82.190833
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "08:00",
+        "closes": "17:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/timhorstrenovations",
+        "https://www.instagram.com/timhorstrenovations",
+        "https://www.linkedin.com/company/tim-horst-renovations"
+      ]
+    }
+    </script>
+    
+    <!-- Preconnect to important domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    
+    <!-- Client-side routing script -->
+    <script type="module">
+      // Handle client-side routing for page refreshes
+      const currentPath = window.location.pathname;
+      if (currentPath !== '/' && !currentPath.match(/\.(js|css|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/)) {
+        window.history.replaceState({}, '', '/#' + currentPath);
+      }
+    </script>
   </head>
-  <body>
+  <body class="min-h-screen bg-white text-gray-900 antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Tim Horst",
+      "url": "https://horsthomes.ca",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://horsthomes.ca/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
   </body>
 </html>

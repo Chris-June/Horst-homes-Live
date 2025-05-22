@@ -133,12 +133,14 @@ const testimonials = [
   return (
     <PageWrapper variant="premium">
       {/* Hero Section */}
-      <div className="relative min-h-[80vh] w-full overflow-hidden">
+      <div className="relative min-h-[90vh] w-full overflow-hidden">
         <div className="absolute inset-0 overflow-hidden bg-gray-900">
-          <img
-            src="https://images.unsplash.com/photo-1565183928294-7063f23ce0f8?q=80&w=2070&auto=format&fit=crop"
-            alt="Premium windows and doors"
-            className="absolute inset-0 h-full w-full object-cover opacity-30 transform scale-105"
+          <div 
+            className="absolute inset-0 bg-cover bg-center transform scale-105"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1565183928294-7063f23ce0f8?q=80&w=2070&auto=format&fit=crop')`,
+              filter: 'brightness(0.5)',
+            }}
             data-aos="zoom-out"
             data-aos-duration="2000"
           />
@@ -158,7 +160,12 @@ const testimonials = [
             Only the best materials for durability, efficiency, and beauty in every installation.
           </p>
           <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button asChild size="lg" className="text-lg px-8 py-6 hover-lift">
+            <Button 
+              asChild 
+              size="lg" 
+              className="text-lg px-8 py-6 bg-transparent hover:bg-white/10 border-2 border-white text-white hover:text-white"
+              variant="outline"
+            >
               <a href="#products">Browse Our Products</a>
             </Button>
           </div>

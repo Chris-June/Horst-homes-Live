@@ -1,6 +1,8 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import * as React from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog';
 import { motion, AnimatePresence } from 'framer-motion';
-import { DivideIcon as LucideIcon } from 'lucide-react';
+
+import type { LucideIcon } from 'lucide-react';
 
 interface ServiceDetailsModalProps {
   isOpen: boolean;
@@ -10,7 +12,6 @@ interface ServiceDetailsModalProps {
     name: string;
     description: string;
     details: string[];
-    image: string;
     importance?: {
       toClients: string;
       toTim: string;
@@ -45,14 +46,16 @@ const modalVariants = {
   }
 };
 
-const iconVariants = {
+import { Variants } from 'framer-motion';
+
+const iconVariants: Variants = {
   hover: {
     scale: 1.1,
     rotate: [0, -10, 10, -10, 10, 0],
     transition: {
       duration: 2,
       repeat: Infinity,
-      repeatType: "reverse"
+      repeatType: "reverse" as const
     }
   }
 };
@@ -120,16 +123,7 @@ export function ServiceDetailsModal({ isOpen, onClose, service }: ServiceDetails
                 </div>
               </DialogHeader>
 
-              <div className="mt-6 space-y-8">
-                <div className="relative w-full h-48 rounded-lg overflow-hidden">
-                  <img 
-                    src={service.image} 
-                    alt={service.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                <div className="space-y-6">
+              <div className="mt-6 space-y-6">
                   <div>
                     <h3 className="text-lg font-semibold text-blue-600 mb-2">Why This Matters to You</h3>
                     <p className="text-gray-700 leading-relaxed">
@@ -163,7 +157,6 @@ export function ServiceDetailsModal({ isOpen, onClose, service }: ServiceDetails
                     </ul>
                   </div>
                 </div>
-              </div>
             </motion.div>
           </DialogContent>
         )}

@@ -1,48 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-// Import UI components
-import { Button as BaseButton } from '../components/ui/button';
+import type { LucideIcon } from 'lucide-react';
 import { PageWrapper } from '../components/PageWrapper';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { AnimatedCard } from '../components/AnimatedCard';
 import { ServiceDetailsModal } from '../components/services/ServiceDetailsModal';
-import { cn } from '../lib/utils';
 
-// Create a typed Button component with variant support
-type ButtonVariant = 'default' | 'outline' | 'secondary' | 'ghost' | 'link' | 'destructive';
 
-interface ButtonProps extends React.ComponentProps<typeof BaseButton> {
-  variant?: ButtonVariant;
-}
-
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, variant = 'default', ...props }, ref) => {
-  const variantClasses = {
-    default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-    outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-    secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-    ghost: 'hover:bg-accent hover:text-accent-foreground',
-    link: 'text-primary underline-offset-4 hover:underline',
-    destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-  };
-
-  return (
-    <BaseButton
-      ref={ref}
-      className={cn(
-        variantClasses[variant] || variantClasses.default,
-        className
-      )}
-      {...props}
-    />
-  );
-});
-
-Button.displayName = 'Button';
-import { Laptop, DoorOpen, Home, PaintBucket, Hammer, Wrench, ChevronDown, ChevronUp, MapPin, Phone, Star, Info, Shield } from 'lucide-react';
+import { Button } from '../components/ui/button';
+import { Laptop, DoorOpen, Home, PaintBucket, Wrench, MapPin, Phone, Star, Info, Shield } from 'lucide-react';
 
 interface Service {
-  icon: React.ComponentType<{ className?: string }>;
+  icon: LucideIcon;
+  className?: string;
   name: string;
   description: string;
   details: string[];
@@ -190,9 +161,12 @@ export function Services() {
             with quality and care in Chatham-Kent.
           </p>
           <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button asChild className="text-lg px-8 py-6">
-              <Link to="/quote">Request a Free Quote</Link>
-            </Button>
+            <Link 
+              to="/quote"
+              className="inline-flex items-center justify-center rounded-lg px-8 py-6 text-lg font-medium transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 bg-transparent text-white border-2 border-white/80 hover:bg-white/10 hover:border-white shadow-sm hover:shadow-lg"
+            >
+              Request a Free Quote
+            </Link>
           </div>
           </motion.div>
         </div>
@@ -216,7 +190,7 @@ export function Services() {
           </p>
         </div>
 
-        <AnimatedSection className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-3 px-4">
+        <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-3 px-4">
           {services.map((service, index) => (
             <AnimatedCard 
               key={service.name} 
@@ -231,18 +205,16 @@ export function Services() {
                   {service.name}
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{service.description}</p>
-                <span className="text-sm text-blue-600 font-medium mt-3 block">Est. {service.date}</span>
               </div>
-              <Button
-                variant="ghost"
-                className="rounded-full hover:bg-blue-50 dark:hover:bg-blue-900/20 flex-shrink-0 ml-4 p-2"
+              <button
                 onClick={() => setSelectedService(service)}
+                className="inline-flex items-center justify-center rounded-full p-2 text-blue-600 hover:bg-white/10 hover:border-white transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
               >
-                <Info className="h-5 w-5 text-blue-600" />
-              </Button>
+                <Info className="h-5 w-5" />
+              </button>
             </AnimatedCard>
           ))}
-        </AnimatedSection>
+        </div>
         </div>
       </div>
       

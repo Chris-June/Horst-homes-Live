@@ -1,15 +1,14 @@
 import React from 'react';
 import { PageWrapper } from '../components/PageWrapper';
-import { AnimatedSection } from '../components/AnimatedSection';
 import { AnimatedCard } from '../components/AnimatedCard';
 import { FaTools, FaHardHat, FaHandshake, FaTrophy } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
-import { TimelineDetailsModal } from '@/components/about/TimelineDetailsModal';
+import { TimelineDetailsModal } from '../components/about/TimelineDetailsModal';
 import { Info } from 'lucide-react';
 import { useState } from 'react';
+import { containerVariants } from '../lib/animations';
 
 const companyTimeline = [
   {
@@ -38,8 +37,6 @@ const companyTimeline = [
   }
 ];
 
-
-
 export function About() {
   const [selectedMilestone, setSelectedMilestone] = useState<typeof companyTimeline[0] | null>(null);
 
@@ -64,14 +61,19 @@ export function About() {
             transition={{ duration: 1, type: "spring", stiffness: 100 }}
             className="text-center max-w-3xl mx-auto"
           >
-          <h1 className="text-4xl font-bold tracking-tight text-gradient-animated sm:text-6xl lg:text-7xl mb-6">
-            Crafting Homes, Building Dreams
+          <h1 className="text-4xl pb-6 font-bold tracking-tight text-gradient-animated sm:text-6xl lg:text-7xl mb-6">
+            Building Dreams
           </h1>
           <p className="mt-6 text-lg sm:text-xl leading-8 text-white/90 max-w-2xl mx-auto">
-            With over three decades of dedicated service, Tim Horst has been transforming houses into homes. Our journey is defined by passion, precision, and a profound commitment to excellence in every project we undertake.
+            With over three decades of dedicated service, Horst Home Improvements has been transforming houses into homes. Our journey is defined by passion, precision, and a profound commitment to excellence in every project we undertake.
           </p>
           <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button asChild size="lg" className="text-lg px-8 py-6 hover-lift">
+            <Button 
+              asChild 
+              size="lg" 
+              variant="outline"
+              className="text-lg px-8 py-6 bg-transparent border-2 border-white hover:bg-white/10 hover:border-white/90 hover:text-white transition-all duration-300 hover-lift"
+            >
               <Link to="/quote">Get a Free Quote</Link>
             </Button>
           </div>
@@ -135,9 +137,15 @@ export function About() {
 
       {/* Mission & Values */}
       <div className="relative py-24 sm:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-pattern opacity-5" />
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <AnimatedSection className="bg-gradient-card p-10 rounded-3xl hover-lift">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="p-0 bg-transparent"
+          style={{ background: 'none !important' }}
+        >
         <h2 className="text-base font-semibold leading-7 text-blue-600 text-center">
           Our Purpose
         </h2>
@@ -185,7 +193,7 @@ export function About() {
             </div>
           </div>
         </div>
-      </AnimatedSection>
+        </motion.div>
       </div>
       </div>
 

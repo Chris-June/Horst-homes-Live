@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Phone, ArrowRight, Star, Info, Shield, Award, Zap, Hammer, Building2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { PageWrapper } from '@/components/PageWrapper';
-import { AnimatedSection } from '@/components/AnimatedSection';
-import { AnimatedCard } from '@/components/AnimatedCard';
-import { FeatureDetailsModal } from '@/components/features/FeatureDetailsModal';
-import { containerVariants, itemVariants } from '@/lib/animations';
+import { Phone, ArrowRight, Star, Info, Shield, Award, Hammer, Building2 } from 'lucide-react';
+import { Button } from '../components/ui/button';
+import { PageWrapper } from '../components/PageWrapper';
+import { AnimatedSection } from '../components/AnimatedSection';
+import { lazy, Suspense } from 'react';
+
+// Use dynamic import for code splitting
+const FeatureDetailsModal = lazy(() => import('../components/features/FeatureDetailsModal'));
+import { containerVariants, itemVariants } from '../lib/animations';
 
 const stats = [
-  { label: 'Years Experience', value: '30+' },
+  { label: 'Years Experience', value: '30' },
   { label: 'Projects Completed', value: '1000+' },
   { label: 'Referred Clients', value: '800+' },
   { label: 'Service Areas', value: '10+' },
@@ -28,12 +30,6 @@ const features = [
     name: 'Quality Craftsmanship',
     description: 'Attention to detail and superior workmanship in every project.',
     color: 'bg-gradient-to-br from-red-600 to-red-800 text-white',
-  },
-  {
-    icon: Zap,
-    name: 'WSIB Certified',
-    description: 'Fully certified and compliant with all safety standards.',
-    color: 'bg-gradient-to-br from-amber-500 to-amber-700 text-white',
   },
   {
     icon: Hammer,
@@ -74,6 +70,7 @@ function Home() {
 
   return (
     <PageWrapper variant="premium">
+
       {/* Hero Section */}
       <div className="relative min-h-[90vh] w-full overflow-hidden">
         <div className="absolute inset-0 overflow-hidden bg-gray-900">
@@ -104,30 +101,28 @@ function Home() {
               Quality Home Renovations
             </h1>
             <p className="mt-4 sm:mt-6 text-lg sm:text-xl leading-8 text-white/90 max-w-2xl mx-auto">
-              With over 30 years of experience, Tim Horst delivers exceptional
+              With over 30 years of experience, Horst Home Improvement delivers exceptional
               craftsmanship and reliable service to homeowners in Chatham-Kent.
             </p>
             <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Button asChild size="lg" className="text-lg px-8 py-6 hover-lift">
-                <Link to="/quote">Get a Free Quote</Link>
-              </Button>
-              <Button 
-                asChild 
-                variant="outline" 
-                size="lg" 
-                className="text-lg px-8 py-6 text-white border-white/30 hover:bg-white/10 hover:border-white/50"
+              <Link 
+                to="/quote"
+                className="inline-flex items-center justify-center rounded-lg px-8 py-6 text-lg font-medium transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 bg-transparent text-white border-2 border-white/80 hover:bg-white/10 hover:border-white shadow-sm hover:shadow-lg"
               >
-                <Link to="/portfolio" className="flex items-center gap-2">
-                  View Our Work
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </Button>
+                Get a Free Quote
+              </Link>
+              <Link 
+                to="/portfolio"
+                className="inline-flex items-center justify-center rounded-lg px-8 py-6 text-lg font-medium transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 bg-transparent text-white border-2 border-white/80 hover:bg-white/10 hover:border-white shadow-sm hover:shadow-lg"
+              >
+                View Our Work
+                <ArrowRight className="h-5 w-5 ml-2" />
+              </Link>
             </div>
           </motion.div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </div>
-
       {/* Stats Section */}
       <div className="relative py-24 sm:py-32">
         <div className="absolute inset-0 bg-gradient-pattern opacity-10" />
@@ -211,11 +206,13 @@ function Home() {
 
       {/* Feature Details Modal */}
       {selectedFeature && (
-        <FeatureDetailsModal
-          isOpen={!!selectedFeature}
-          onClose={() => setSelectedFeature(null)}
-          feature={selectedFeature}
-        />
+        <Suspense fallback={null}>
+          <FeatureDetailsModal
+            isOpen={!!selectedFeature}
+            onClose={() => setSelectedFeature(null)}
+            feature={selectedFeature}
+          />
+        </Suspense>
       )}
 
       {/* Testimonials Section */}

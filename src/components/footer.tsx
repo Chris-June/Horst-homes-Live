@@ -1,14 +1,15 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, Linkedin, Twitter, Mail, MapPin, Phone } from 'lucide-react';
-import { LoginModal } from '@/components/admin/LoginModal';
-import { signOut } from '@/lib/auth';
-import { useAuth } from '@/contexts/AuthContext';
+import { LoginModal } from '../components/admin/LoginModal';
+import { signOut } from '../lib/auth';
+import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'sonner';
-import { Button } from '@/components/ui/button';
-import { ProductsUploadModal } from '@/components/admin/products-upload-modal';
-import { PortfolioUploadModal } from '@/components/admin/portfolio-upload-modal';
-import { BlogUploadModal } from '@/components/admin/blog-upload-modal';
+import { Button } from '../components/ui/button';
+import { ProductsUploadModal } from '../components/admin/products-upload-modal';
+import { PortfolioUploadModal } from '../components/admin/portfolio-upload-modal';
+import { BlogUploadModal } from '../components/admin/blog-upload-modal';
 
 const navigation = {
   main: [
@@ -96,7 +97,7 @@ export function Footer() {
             {/* Company Info */}
             <motion.div variants={itemVariants}>
               <Link to="/" className="text-2xl font-bold text-gradient-animated">
-                Tim Horst
+               Horst Home Improvements  
               </Link>
               <p className="mt-4 text-base text-gray-600 dark:text-gray-300 leading-relaxed">
                 30+ years of experience in home renovations.
