@@ -5,6 +5,5 @@
       "destination": "/index.html"
     }
   ],
-  "output": "static",
   "cleanUrls": true
 }

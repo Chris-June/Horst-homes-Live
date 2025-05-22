@@ -156,7 +156,7 @@ function Home() {
       >
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-blue-600 text-center">
-            Why Choose Tim Horst
+            Why Choose Horst Home Improvement?
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gradient-animated sm:text-4xl text-center">
             Experience the Difference
@@ -336,7 +336,7 @@ function Home() {
                     </div>
                     <div className="space-y-4">
                       <Button asChild size="lg" className="w-full text-lg py-6 hover-lift">
-                        <Link to="/quote">Get Your Free Quote</Link>
+                        <Link to="/quote">Get Your Quote</Link>
                       </Button>
                       <Button 
                         asChild 
@@ -344,7 +344,7 @@ function Home() {
                         size="lg" 
                         className="w-full text-lg py-6 hover-lift"
                       >
-                        <a href="tel:+15555555555" className="flex items-center justify-center gap-2">
+                        <a href="tel:+19059647859" className="flex items-center justify-center gap-2">
                           <Phone className="h-5 w-5" />
                           Call Now
                         </a>

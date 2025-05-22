@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "composite": true,
     "target": "ES2020",
@@ -15,16 +16,6 @@
     "isolatedModules": true,
     "moduleDetection": "force",
 
-    /* Path Aliases */
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@lib/*": ["./src/lib/*"],
-      "@assets/*": ["./src/assets/*"]
-    },
-
     /* React Specific */
     "jsx": "react-jsx",
     "types": ["node", "@supabase/supabase-js"],
@@ -35,6 +26,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

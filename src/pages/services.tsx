@@ -157,7 +157,7 @@ export function Services() {
             Horst Home Renovation Services
           </h1>
           <p className="mt-6 text-lg sm:text-xl leading-8 text-white/90 max-w-2xl mx-auto">
-          30+ years of trusted craftsmanship, serving your home renovation needs
+          30+ years of trusted craftsmanship. Now serving your home renovation needs
             with quality and care in Chatham-Kent.
           </p>
           <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
