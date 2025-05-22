@@ -51,12 +51,11 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks: (id) => {
             if (id.includes('node_modules')) {
-              if (id.includes('react-dom') || id.includes('scheduler')) {
+              if (id.includes('react') || id.includes('react-dom')) {
                 return 'vendor-react';
               }
-              if (id.includes('@radix-ui') || id.includes('class-variance-authority') || 
-                  id.includes('clsx') || id.includes('tailwind-merge')) {
-                return 'vendor-ui';
+              if (id.includes('@radix-ui')) {
+                return 'vendor-radix';
               }
               if (id.includes('framer-motion') || id.includes('popmotion')) {
                 return 'vendor-animations';
@@ -75,6 +74,8 @@ export default defineConfig(({ mode }) => {
                 return `chunk-${match[1].toLowerCase()}`;
               }
             }
+            // Default chunk for all other modules
+            return 'common';
           },
           chunkFileNames: 'assets/[name]-[hash].js',
           entryFileNames: 'assets/[name]-[hash].js',
