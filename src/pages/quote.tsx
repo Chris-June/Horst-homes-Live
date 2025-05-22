@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { InlineWidget } from 'react-calendly';
+
 import { Phone, Mail, Star, Shield, Calendar, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -298,23 +298,8 @@ export function Quote() {
             </AnimatedSection>
 
             {/* Calendly Integration */}
-            <AnimatedSection className="bg-gradient-card p-8 rounded-3xl hover-lift">
-              <h2 className="text-2xl font-bold text-gradient-animated mb-6">
-                Schedule a Consultation
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-8">
-                Book a free consultation with Tim to discuss your project in detail. Choose a time that works best for you.
-              </p>
-              <div className="rounded-xl overflow-hidden border border-white/20">
-                <InlineWidget
-                  url="https://calendly.com/timhorst/30min"
-                  styles={{
-                    height: '650px',
-                    border: 'none',
-                  }}
-                />
-              </div>
-            </AnimatedSection>
+            {/* Removed Calendly Integration */}
+
           </div>
         </div>
       </div>
